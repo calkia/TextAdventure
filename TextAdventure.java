@@ -307,7 +307,7 @@ public class TextAdventure
     input = inScanner.nextLine();
     System.out.println("--------------------------------------------------------------------");
     if (input.equalsIgnoreCase("yes")){
-      System.out.println("You enter the mysterious city and come upon... \nNothing. There's nothing here. \nrob: approach the unicorn peacefully \nleave: kill the unicorn!\n"+ ourHero.getName() + ": ");
+      System.out.println("You enter the mysterious city and come upon... \nNothing. There's nothing here. \nrob: there must be something good to steal! \nleave: nothing intresting here\n"+ ourHero.getName() + ": ");
       input = inScanner.nextLine();
       System.out.println("--------------------------------------------------------------------");
       if (input.equalsIgnoreCase("rob")){
