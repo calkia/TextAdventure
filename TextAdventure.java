@@ -87,24 +87,30 @@ public class TextAdventure
       ourHero.setHealth(ourHero.getHealth()+10);
       System.out.println("Nice you avoided any nasty diseases that could have come from those coins!\n"+ourHero.stats());
     }
-    /* System.out.println("--------------------------------------------------------------------");
+    System.out.println("--------------------------------------------------------------------");
     System.out.println("Its starting to get late, time to look for a place to rest. \n You see a nicely furnished inn, but it costs 20 coins for a night. You also see a shady looking inn for 5 coins only! \nYour current gold: "+ourHero.gold+"\nexpensive: pay the price for a luxery inn experiance \ncheap: stay frugal and safe with the cheap inn \noutside: take you chances out in the wild outside the village, its free!\n"+ ourHero.getName() + ": ");
     System.out.println("--------------------------------------------------------------------");
     do{
+      chooseAgain = false;
       if (input.equalsIgnoreCase("expensive") && ourHero.getGold() >= 20){
         System.out.println("You stayed the night in comfortable luxery!");
+        ourHero.setGold(ourHero.getGold()-20);
+        System.out.println(ourHero.stats());
       }
       else if (input.equalsIgnoreCase("cheap") && ourHero.getGold() >=5){
-      
+        ourHero.setGold(0);
+        gameEnd("The shady inn owners killed you and robbed your body! Some things are too good to be true...");
       }
       else if (input.equalsIgnoreCase("outside")){
-
+        System.out.println("While uncomfortable you survived! However due to the cold your health deteriorated.");
+        ourHero.setHealth(ourHero.getHealth()-10);
+        System.out.println(ourHero.stats());
       }
       else{
         chooseAgain = true;
         System.out.println("You don't have enough gold for this silly! \nChoose again!\n"+ ourHero.getName() + ": ");
       }
-    }while(chooseAgain != false); */
+    }while(chooseAgain != false);
     
 
     // Take action or go to another zone based on their choice
