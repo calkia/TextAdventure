@@ -46,13 +46,16 @@ public class TextAdventure
       input = inScanner.nextLine();
       System.out.println("--------------------------------------------------------------------");
       if (input.equalsIgnoreCase("yellow")){
+        console.setImage("glowingFruit.jpg");
         ourHero.setHealth(ourHero.getHealth()+20);
         System.out.println("Congrats, the glowing yellow fruit was a special fruit! You gained 20 extra health! \nYou survived the night.\n"+ourHero.stats()+"\nWhat would you like to do? \nvillage: walk to the village \nplains: walk to the plains nearby\n" + ourHero.getName() + ": ");
       }
       else if (input.equalsIgnoreCase("regular")){
+        console.setImage("regFruit.jpg");
         System.out.println("Congrats, regular fruit was infact, regular fruit! \nYou survived the night. \n"+ ourHero.stats()+"\nWhat would you like to do? \nvillage: walk to the village \nplains: walk to the plains nearby\n" + ourHero.getName() + ": ");
       }
       else if (input.equalsIgnoreCase("neon")){
+        console.setImage("neonFruit.jpg");
         gameEnd("Survival 101: neon things are always poisonous...why would you eat that?");
       }
       
@@ -113,7 +116,20 @@ public class TextAdventure
         input = inScanner.nextLine();
       }
     }while(chooseAgain == true);
-    
+
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println("Its time to explore again! \nYou see plains to the north, a rocky shore to the east, and a tall mountain range in the middle.\nplains: travel to the plains \nrocky: travel to the rocky shore \nmountains: travel to the mountain range\n"+ ourHero.getName() + ": ");
+    input = inScanner.nextLine();
+
+    if (input.equalsIgnoreCase("plains")){
+      enterPlains();
+    }
+    else if (input.equalsIgnoreCase("rocky")){
+      enterRockyShore();
+    }
+    else if (input.equalsIgnoreCase("mountains")){
+      enterMountains();
+    }
 
     // Take action or go to another zone based on their choice
     // ADD CODE HERE
@@ -123,25 +139,38 @@ public class TextAdventure
   private void enterPlains()
   {
     // change image
-    // ADD CODE HERE
+    console.setImage("plains.jpg");
 
     // describe the area/situation to the user. 
     // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-
-    if (input.equalsIgnoreCase("expensive")){
-
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println("You enter a flat plain with bristling tall grass. \nWhile walking through the grass you trip on... \n...what is that actually?\nIt's a grass-dweller! \nescape: run run run away!! \nfight: lets battle!!\n"+ ourHero.getName() + ": ");
+    input = inScanner.nextLine();
+    System.out.println("--------------------------------------------------------------------");
+    if (input.equalsIgnoreCase("fight")){
+      battleGrassDweller();
     }
-    else if (input.equalsIgnoreCase("cheap")){
-      
+    else if (input.equalsIgnoreCase("escape")){
+      System.out.println("Whew you escaped the grass dweller!");
+    }
+
+    // Take action or go to another zone based on their choice
+    // ADD CODE HERE
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println("It's time to move on again. \nYou see a small village to the south, a rocky shore to the east, and a tall mountain range inbetween. \nvillage: travel to the village \nrocky: travel to the rocky shore \nmountains: travel to the mountain range\n"+ ourHero.getName() + ": ");
+    if (input.equalsIgnoreCase("village")){
+      enterVillage();;
+    }
+    else if (input.equalsIgnoreCase("rocky")){
+      enterRockyShore();
+    }
+    else if (input.equalsIgnoreCase("mountains")){
+      enterMountains();
     }
     
   }
 
-  private void enterZone3()
+  private void enterRockyShore()
   {
     // change image
     // ADD CODE HERE
@@ -155,7 +184,7 @@ public class TextAdventure
     
   }
 
-  private void enterZone4()
+  private void enterMountains()
   {
     // change image
     // ADD CODE HERE
@@ -169,7 +198,7 @@ public class TextAdventure
     
   }
 
-  private void enterZone5()
+  private void enterSkyCity()
   {
     // change image
     // ADD CODE HERE
@@ -183,7 +212,7 @@ public class TextAdventure
     
   }
 
-  private void enterZone6()
+  private void enterUndergroundCity()
   {
     // change image
     // ADD CODE HERE
@@ -213,8 +242,54 @@ public class TextAdventure
       System.out.println("You lived a meaningless and sad life! Poor and no acomplishments to show. (Bad Ending)");
     }
     System.out.println(message);
-    System.out.println(ourHero.stats());
+    System.out.println("Gold: "+ourHero.getGold()+"  Monsters Defeated: "+ourHero.getMonstersDefeated());
 
     inScanner.close();
+  }
+
+  private void battleGrassDweller(){
+    int grassDwellerHealth = 30;
+    boolean battling = true;
+    boolean win = false, lose = false, escape = false;
+    int rand1, rand2;
+    System.out.println("You've challenged the grass-dweller!");
+    while (battling){
+      System.out.println("GrassDweller: "+grassDwellerHealth+" health\nYou: "+ourHero.getHealth()+" health\nattack: attack the grass dweller with a random attack amount (5-15)\nescape: escape the grass dweller!\n"+ ourHero.getName() + ": ");
+      input = inScanner.nextLine();
+      if (input.equalsIgnoreCase("attack")){
+        rand1 = (int)((Math.random()*11)+5);
+        rand2 = (int)((Math.random()*11)+5);
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("You attacked grass-dweller and dealt "+rand1+" damage!");
+        grassDwellerHealth -= rand1;
+        System.out.println("Grass Dweller attacks back! Dealing: "+rand2+" damage!");
+        ourHero.setHealth(ourHero.getHealth()-rand2);
+      }
+      else if (input.equalsIgnoreCase("escape")){
+        escape = true;
+      }
+      if (ourHero.getHealth()<= 0){
+        lose = true;
+      }
+      else if (grassDwellerHealth <= 0){
+        win = true;
+      }
+      if (win || lose || escape){
+        battling = false;
+      }
+    }
+    System.out.println("--------------------------------------------------------------------");
+    if (win){
+      ourHero.setGold(ourHero.getGold()+50);
+      ourHero.defeatMonster();
+      System.out.println("You've won!\nYou gained 50 gold!\n"+ourHero.stats());;
+    }
+    else if (lose){
+      gameEnd("You lost the fight with the grass-dweller. Should have escaped while you had the chance!!");
+    }
+    else{
+      System.out.println("Whew, you escaped the land-dweller!");
+    }
+    
   }
 }
