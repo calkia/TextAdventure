@@ -110,7 +110,7 @@ public class TextAdventure
         chooseAgain = true;
         System.out.println("You don't have enough gold for this silly! \nChoose again!\n"+ ourHero.getName() + ": ");
       }
-    }while(chooseAgain != false);
+    }while(chooseAgain == true);
     
 
     // Take action or go to another zone based on their choice
