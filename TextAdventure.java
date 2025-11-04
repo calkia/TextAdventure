@@ -89,8 +89,9 @@ public class TextAdventure
     }
     System.out.println("--------------------------------------------------------------------");
     System.out.println("Its starting to get late, time to look for a place to rest. \n You see a nicely furnished inn, but it costs 20 coins for a night. You also see a shady looking inn for 5 coins only! \nYour current gold: "+ourHero.gold+"\nexpensive: pay the price for a luxery inn experiance \ncheap: stay frugal and safe with the cheap inn \noutside: take you chances out in the wild outside the village, its free!\n"+ ourHero.getName() + ": ");
-    System.out.println("--------------------------------------------------------------------");
+    input = inScanner.nextLine();
     do{
+      System.out.println("--------------------------------------------------------------------");
       chooseAgain = false;
       if (input.equalsIgnoreCase("expensive") && ourHero.getGold() >= 20){
         System.out.println("You stayed the night in comfortable luxery!");
@@ -109,6 +110,7 @@ public class TextAdventure
       else{
         chooseAgain = true;
         System.out.println("You don't have enough gold for this silly! \nChoose again!\n"+ ourHero.getName() + ": ");
+        input = inScanner.nextLine();
       }
     }while(chooseAgain == true);
     
