@@ -53,4 +53,8 @@ public class Player
   {
     monstersDefeated += 1;
   }
+
+  public String stats(){
+    return "Health: "+health+"  Gold: "+gold+"  Monsters Defeated: "+monstersDefeated;
+  }
 }
