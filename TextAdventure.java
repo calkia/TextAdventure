@@ -20,7 +20,7 @@ public class TextAdventure
   public void play()
   {
     // start of adventure. You can change this if you like
-    console.setImage("beach.jpeg");
+    console.setImage("graveyard.jpg");
 
     // ask the user for their name.
     System.out.println("What is your name?\n");
